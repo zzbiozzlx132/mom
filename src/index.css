@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #f06292;
+  --primary-light: #f8bbd0;
+  --primary-dark: #e91e63;
+  --secondary: #fce4ec;
+  --accent: #ffb74d;
+  --background: #ffffff;
+  --text: #333333;
+  --text-light: #666666;
+  --success: #66bb6a;
+  --warning: #ffb74d;
+  --error: #ef5350;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  color: var(--text);
+  background-color: var(--background);
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: var(--primary-dark);
+  line-height: 1.2;
+}
+
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-pink-100 text-pink-800 px-4 py-2 rounded-md hover:bg-pink-200 transition-colors;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow;
+  }
+  
+  .checkbox-container {
+    @apply flex items-start gap-3 mb-4 p-3 border border-pink-100 rounded-md hover:bg-pink-50 transition-colors;
+  }
+  
+  .checkbox-container input:checked + label {
+    @apply line-through text-gray-500;
+  }
+  
+  .page-title {
+    @apply text-3xl md:text-4xl font-bold text-center mb-8 text-pink-700;
+  }
+  
+  .section-title {
+    @apply text-2xl font-semibold mb-4 text-pink-600;
+  }
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
