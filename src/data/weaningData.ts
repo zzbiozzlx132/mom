@@ -2,7 +2,7 @@ import { ChecklistData } from '../types/ChecklistTypes';
 
 export const weaningChecklistData: ChecklistData = {
   title: "CHUẨN BỊ CHO BÉ ĂN DẶM – TỪ A ĐẾN Z",
-  introduction: "Hôm nay mình muốn chia sẻ về một chủ đề chắc chắn mẹ nào cũng phải trải qua: chuẩn bị cho bé ăn dặm. Đây không chỉ là một cột mốc phát triển quan trọng của con, mà còn là \"cuộc cách mạng nhỏ\" với cả nhà – đặc biệt là mẹ. Và nếu chuẩn bị đầy đủ, khoa học ngay từ đầu, mọi thứ sẽ dễ dàng hơn rất nhiều!",
+  introduction: "Chào mọi người!\nSau đây là tất tần tật những món mình đã chuẩn bị, kèm theo một số kinh nghiệm thực tế và những sản phẩm uy tín mình đang dùng – để mẹ nào cần thì tham khảo cho tiện nhé!",
   sections: [
     {
       id: "weaning-essentials",
@@ -21,7 +21,8 @@ export const weaningChecklistData: ChecklistData = {
           name: "Yếm ăn (yếm silicone/ áo yếm)",
           quantity: "2-3 cái",
           reason: "Giữ quần áo bé sạch sẽ khi ăn.",
-          link: "https://s.shopee.vn/6AYMFRVozZ",
+          // Đã cập nhật link, lấy link đầu tiên từ gợi ý của bạn
+          link: "https://s.shopee.vn/6AYMFRVozZ", // Hoặc "https://s.shopee.vn/1qPN5emH4e"
           checked: false
         },
         {
@@ -61,7 +62,8 @@ export const weaningChecklistData: ChecklistData = {
           name: "Cốc hoặc Bình tập uống",
           quantity: "1-2 cái",
           reason: "Có tay cầm, chống sặc, tập kỹ năng hút tự uống nước cho bé.",
-          link: "https://s.shopee.vn/3qARTwcEcA",
+          // Đã cập nhật link, lấy link đầu tiên từ gợi ý của bạn
+          link: "https://s.shopee.vn/3qARTwcEcA", // Hoặc "https://s.shopee.vn/60Ew4UyKJN"
           checked: false
         },
         {
@@ -100,22 +102,57 @@ export const weaningChecklistData: ChecklistData = {
           id: "w12",
           name: "Dụng cụ vệ sinh (cọ rửa…)",
           quantity: "1 bộ",
-          reason: "Dùng để vệ sinh sạch sẽ các vật dụng sau ăn.",
+          reason: "Dùng để vệ sinh sạch sẽ các vật dụng sau ăn.", // Mô tả từ file code gốc, vì bạn ghi tùy nhu cầu
+          // link: không có link theo yêu cầu
           checked: false
         },
         {
           id: "w13",
           name: "Bàn chải đánh răng",
-          quantity: "1 cái",
-          reason: "Bắt đầu tập cho bé vệ sinh răng miệng sau khi ăn.",
-          link: "https://s.shopee.vn/3VXbCctBKN",
+          quantity: "1 cái", // Số lượng dựa theo file code gốc
+          reason: "Hình con vật bé sẽ thích thú hợp tác hơn.", // Cập nhật reason
+          link: "https://s.shopee.vn/gDqcQYIUd", // Cập nhật link
           checked: false
         },
         {
           id: "w14",
           name: "Kem đánh răng",
-          quantity: "1 tuýp",
-          reason: "Bé có thể nuốt được, đủ các vị trái cây.",
+          quantity: "1 tuýp", // Số lượng dựa theo file code gốc
+          reason: "Vị trái cây bé có thể nuốt được.", // Cập nhật reason
+          link: "https://s.shopee.vn/2B2eQ3f0ca", // Cập nhật link
+          checked: false
+        },
+        // Các sản phẩm mới được thêm vào
+        {
+          id: "w15",
+          name: "Bột nêm ăn dặm",
+          quantity: "1 gói", // Tạm đặt, bạn có thể thay đổi
+          reason: "vị từ rau củ không có muối và chất bảo quản yên tâm nha.",
+          link: "https://s.shopee.vn/5AgFyOFu7c",
+          checked: false
+        },
+        {
+          id: "w16",
+          name: "Dầu ăn dặm",
+          quantity: "1 chai", // Tạm đặt, bạn có thể thay đổi
+          reason: "Gạo dùng của hãng này, vừa 100% nguyên chất, bỏ vào cháo thơm ngon hơn, loại nào cũng bổ dưỡng.",
+          link: "https://s.shopee.vn/9ACOl6fTI0",
+          checked: false
+        },
+        {
+          id: "w17",
+          name: "Chén ăn dặm thuỷ tinh",
+          quantity: "1 cái", // Tạm đặt, bạn có thể thay đổi
+          reason: "Có “ml” cho con ăn mẹ biết được bé ăn bao nhiêu mà tăng lượng ăn theo nhu cầu bé nha.",
+          link: "https://s.shopee.vn/8AJrZRIleL",
+          checked: false
+        },
+        {
+          id: "w18",
+          name: "Set thìa dĩa tập xúc cho bé",
+          quantity: "1 bộ", // Tạm đặt, bạn có thể thay đổi
+          reason: "Thấy bé muốn tự lập ăn uống, thì mẹ mua set này cho bé tự xúc okela nè.",
+          link: "https://s.shopee.vn/1BA8e948Bo",
           checked: false
         }
       ]

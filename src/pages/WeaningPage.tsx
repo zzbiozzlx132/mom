@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
+// Đảm bảo weaningChecklistData trong file này đã được cập nhật
 import { weaningChecklistData, weaningGuideData } from '../data/weaningData';
 import ShareButton from '../components/ShareButton';
-import { ChecklistItem } from '../types/ChecklistTypes';
+import { ChecklistItem } from '../types/ChecklistTypes'; // Giả sử bạn có file types này
 import { X, ExternalLink, Check, ChevronDown, ChevronUp, Info } from 'lucide-react';
 
 const WeaningPage: React.FC = () => {
+  // weaningChecklistData ở đây sẽ là phiên bản đã được cập nhật nếu file nguồn đã thay đổi
   const [checklistData, setChecklistData] = useLocalStorage('weaningChecklist', weaningChecklistData);
   const [visibleSections, setVisibleSections] = useState({
     readiness: true,
@@ -21,7 +23,7 @@ const WeaningPage: React.FC = () => {
       [section]: !prev[section]
     }));
   };
-  
+
   const [progress, setProgress] = useState({
     total: 0,
     checked: 0,
@@ -32,7 +34,7 @@ const WeaningPage: React.FC = () => {
     const allItems = checklistData.sections.flatMap(section => section.items);
     const total = allItems.length;
     const checked = allItems.filter(item => item.checked).length;
-    
+
     setProgress({
       total,
       checked,
@@ -84,13 +86,14 @@ const WeaningPage: React.FC = () => {
     <div className="bg-pink-50 dark:bg-gray-900 min-h-screen py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="text-center mb-8">
+          {/* Tiêu đề và giới thiệu sẽ được lấy từ checklistData đã cập nhật */}
           <h1 className="page-title">{checklistData.title}</h1>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-6">
             {checklistData.introduction}
           </p>
           <div className="flex justify-center mb-6">
-            <ShareButton 
-              title="Chuẩn Bị Cho Bé Ăn Dặm – Từ A Đến Z" 
+            <ShareButton
+              title="Chuẩn Bị Cho Bé Ăn Dặm – Từ A Đến Z"
               text="Hướng dẫn toàn diện về ăn dặm cùng danh sách dụng cụ cần thiết!"
             />
           </div>
@@ -98,7 +101,7 @@ const WeaningPage: React.FC = () => {
 
         {/* When to start weaning section */}
         <section className="mb-10 animate-fade-in">
-          <div 
+          <div
             className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 cursor-pointer"
             onClick={() => toggleSection('readiness')}
           >
@@ -106,12 +109,12 @@ const WeaningPage: React.FC = () => {
               <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400">
                 Khi nào nên bắt đầu ăn dặm?
               </h2>
-              {visibleSections.readiness ? 
-                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> : 
+              {visibleSections.readiness ?
+                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> :
                 <ChevronDown className="w-5 h-5 text-pink-600 dark:text-pink-400" />
               }
             </div>
-            
+
             {visibleSections.readiness && (
               <div className="mt-4 space-y-3">
                 <p className="text-gray-600 dark:text-gray-300 mb-3">
@@ -132,7 +135,7 @@ const WeaningPage: React.FC = () => {
 
         {/* Weaning methods section */}
         <section className="mb-10 animate-fade-in">
-          <div 
+          <div
             className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 cursor-pointer"
             onClick={() => toggleSection('methods')}
           >
@@ -140,12 +143,12 @@ const WeaningPage: React.FC = () => {
               <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400">
                 Các phương pháp ăn dặm
               </h2>
-              {visibleSections.methods ? 
-                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> : 
+              {visibleSections.methods ?
+                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> :
                 <ChevronDown className="w-5 h-5 text-pink-600 dark:text-pink-400" />
               }
             </div>
-            
+
             {visibleSections.methods && (
               <div className="mt-4 space-y-6">
                 {weaningGuideData.weaningMethods.map((method, index) => (
@@ -188,7 +191,7 @@ const WeaningPage: React.FC = () => {
         {/* Progress bars */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8 animate-fade-in">
           <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400 mb-4">Tiến độ chuẩn bị dụng cụ</h2>
-          
+
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-1">
@@ -198,14 +201,14 @@ const WeaningPage: React.FC = () => {
                 </span>
               </div>
               <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                <div 
-                  className={`h-2.5 rounded-full transition-all duration-500 ${getStatusColor(progress.percentage)}`} 
+                <div
+                  className={`h-2.5 rounded-full transition-all duration-500 ${getStatusColor(progress.percentage)}`}
                   style={{ width: `${progress.percentage}%` }}
                 ></div>
               </div>
             </div>
           </div>
-          
+
           <div className="mt-4 text-right">
             <button
               onClick={resetChecklist}
@@ -216,13 +219,14 @@ const WeaningPage: React.FC = () => {
           </div>
         </div>
 
-        {/* === CHECKLIST SECTIONS (PHẦN DUY NHẤT THAY ĐỔI) === */}
+        {/* === CHECKLIST SECTIONS (PHẦN DUY NHẤT THAY ĐỔI NỘI DUNG TỪ DATA) === */}
+        {/* Phần này sẽ render các dụng cụ từ checklistData đã được cập nhật */}
         {checklistData.sections.map((section) => (
           <section key={section.id} className="mb-10 animate-slide-in">
             <h2 className="section-title bg-white dark:bg-gray-800 p-4 rounded-t-lg shadow-sm">
-              {section.title}
+              {section.title} {/* Ví dụ: DỤNG CỤ ĂN DẶM CẦN CHUẨN BỊ */}
             </h2>
-            
+
             {/* Giao diện Bảng (Desktop) */}
             <div className="bg-white dark:bg-gray-800 rounded-b-lg shadow-md overflow-hidden hidden md:block">
               <div className="overflow-x-auto">
@@ -268,11 +272,11 @@ const WeaningPage: React.FC = () => {
             {/* Giao diện Thẻ (Mobile) */}
             <div className="block md:hidden bg-white dark:bg-gray-800 rounded-b-lg shadow-md p-4 space-y-4">
               {section.items.map((item, index) => (
-                <div 
-                  key={item.id} 
+                <div
+                  key={item.id}
                   className={`p-4 rounded-lg shadow border-l-4 ${
-                    item.checked 
-                      ? 'bg-green-50 dark:bg-green-900/20 border-green-400' 
+                    item.checked
+                      ? 'bg-green-50 dark:bg-green-900/20 border-green-400'
                       : 'bg-white dark:bg-gray-800 border-pink-400'
                   }`}
                   style={{boxShadow: '0 2px 4px 0 rgba(0,0,0,0.1)'}}
@@ -282,24 +286,24 @@ const WeaningPage: React.FC = () => {
                       <span className="inline-flex items-center justify-center w-6 h-6 mr-3 text-xs font-semibold text-pink-700 bg-pink-100 rounded-full flex-shrink-0">
                         {index + 1}
                       </span>
-                      <h3 
+                      <h3
                         className={`text-base font-semibold text-gray-900 dark:text-gray-100 flex-1 mr-3 ${
                           item.checked ? 'line-through text-gray-500 dark:text-gray-400' : ''
                         }`}
                       >
-                        {item.name}
+                        {item.name} {/* Tên sản phẩm sẽ hiển thị ở đây */}
                       </h3>
                     </div>
                     <label className="relative inline-flex items-center justify-center cursor-pointer flex-shrink-0">
-                      <input 
-                        type="checkbox" 
+                      <input
+                        type="checkbox"
                         className="sr-only peer"
                         checked={item.checked}
                         onChange={() => handleToggleCheck(section.id, item.id)}
                       />
                       <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center transition-colors
-                        ${item.checked 
-                          ? 'bg-pink-500 border-pink-500 dark:bg-pink-600 dark:border-pink-600' 
+                        ${item.checked
+                          ? 'bg-pink-500 border-pink-500 dark:bg-pink-600 dark:border-pink-600'
                           : 'bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600'}`}>
                         {item.checked && <Check className="w-4 h-4 text-white" />}
                       </div>
@@ -307,23 +311,23 @@ const WeaningPage: React.FC = () => {
                   </div>
 
                   <div className="text-sm text-gray-600 dark:text-gray-400 mb-3 ml-9">
-                    <strong>Số lượng:</strong> {item.quantity}
+                    <strong>Số lượng:</strong> {item.quantity} {/* Số lượng sản phẩm */}
                   </div>
 
                   {item.reason && (
                     <p className={`text-sm text-gray-500 dark:text-gray-400 mb-4 ml-9 ${item.checked ? 'line-through' : ''}`}>
-                      {item.reason}
+                      {item.reason} {/* Mô tả/ghi chú sản phẩm */}
                     </p>
                   )}
 
                   {item.link && (
-                    <a 
-                      href={item.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="inline-flex items-center px-2.5 py-1.5 bg-pink-100 text-pink-700 rounded-md shadow-sm hover:bg-pink-200 dark:bg-pink-900 dark:text-pink-300 dark:hover:bg-pink-800 transition-colors text-xs font-medium whitespace-nowrap ml-9"
                     >
-                      Gợi ý SP <ExternalLink className="w-3.5 h-3.5 ml-1" />
+                      Gợi ý SP <ExternalLink className="w-3.5 h-3.5 ml-1" /> {/* Link gợi ý sản phẩm */}
                     </a>
                   )}
                 </div>
@@ -334,7 +338,7 @@ const WeaningPage: React.FC = () => {
 
         {/* Meal plans by age section */}
         <section className="mb-10 animate-fade-in">
-          <div 
+          <div
             className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 cursor-pointer"
             onClick={() => toggleSection('mealPlans')}
           >
@@ -342,12 +346,12 @@ const WeaningPage: React.FC = () => {
               <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400">
                 Thực đơn theo độ tuổi
               </h2>
-              {visibleSections.mealPlans ? 
-                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> : 
+              {visibleSections.mealPlans ?
+                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> :
                 <ChevronDown className="w-5 h-5 text-pink-600 dark:text-pink-400" />
               }
             </div>
-            
+
             {visibleSections.mealPlans && (
               <div className="mt-6 space-y-8">
                 {weaningGuideData.mealPlansByAge.map((agePlan, index) => (
@@ -362,7 +366,7 @@ const WeaningPage: React.FC = () => {
                         </span>
                       )}
                     </h3>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div className="bg-pink-50 dark:bg-pink-900/20 p-3 rounded-md">
                         <p className="text-sm font-medium text-pink-700 dark:text-pink-300 mb-1">Tần suất</p>
@@ -377,7 +381,7 @@ const WeaningPage: React.FC = () => {
                         <p className="text-sm text-gray-700 dark:text-gray-300">{agePlan.portions}</p>
                       </div>
                     </div>
-                    
+
                     <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center">
                       <Info className="w-4 h-4 mr-1 text-pink-500" /> Thực phẩm gợi ý
                     </h4>
@@ -398,7 +402,7 @@ const WeaningPage: React.FC = () => {
 
         {/* Foods to avoid section */}
         <section className="mb-10 animate-fade-in">
-          <div 
+          <div
             className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 cursor-pointer"
             onClick={() => toggleSection('avoidFoods')}
           >
@@ -406,12 +410,12 @@ const WeaningPage: React.FC = () => {
               <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400">
                 Thực phẩm cần tránh
               </h2>
-              {visibleSections.avoidFoods ? 
-                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> : 
+              {visibleSections.avoidFoods ?
+                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> :
                 <ChevronDown className="w-5 h-5 text-pink-600 dark:text-pink-400" />
               }
             </div>
-            
+
             {visibleSections.avoidFoods && (
               <div className="mt-4">
                 <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-md mb-4">
@@ -434,7 +438,7 @@ const WeaningPage: React.FC = () => {
 
         {/* Safety tips section */}
         <section className="mb-10 animate-fade-in">
-          <div 
+          <div
             className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 cursor-pointer"
             onClick={() => toggleSection('safety')}
           >
@@ -442,12 +446,12 @@ const WeaningPage: React.FC = () => {
               <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400">
                 Lưu ý về an toàn và vệ sinh
               </h2>
-              {visibleSections.safety ? 
-                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> : 
+              {visibleSections.safety ?
+                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> :
                 <ChevronDown className="w-5 h-5 text-pink-600 dark:text-pink-400" />
               }
             </div>
-            
+
             {visibleSections.safety && (
               <div className="mt-4">
                 <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md mb-4">

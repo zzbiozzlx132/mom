@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-// import Footer from './components/Footer'; // <= Đã xóa hoặc comment dòng này
 import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import ChecklistPage from './pages/ChecklistPage';
 import WeaningPage from './pages/WeaningPage';
+import ToysPage from './pages/ToysPage'; // <= Import ToysPage
 import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
@@ -28,14 +28,14 @@ function App() {
     <ThemeProvider>
       <div className="min-h-screen flex flex-col">
         <Navbar />
-        <main className="flex-grow pb-16 md:pb-0"> {/* Thêm padding-bottom cho mobile để không bị che bởi Nav/FAB */}
+        <main className="flex-grow pb-16 md:pb-0"> {/* padding-bottom cho mobile đã có */}
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/checklist" element={<ChecklistPage />} />
             <Route path="/weaning" element={<WeaningPage />} />
+            <Route path="/toys" element={<ToysPage />} /> {/* <= Thêm Route mới */}
           </Routes>
         </main>
-        {/* <Footer /> <= Đã xóa dòng này */}
         {showScrollButton && <ScrollToTop />}
       </div>
     </ThemeProvider>
