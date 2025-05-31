@@ -12,7 +12,8 @@ const ScrollToTop: React.FC = () => {
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-6 right-6 p-3 bg-pink-500 text-white rounded-full shadow-lg hover:bg-pink-600 transition-colors z-40 animate-fade-in"
+      // ĐÃ THAY ĐỔI: bottom-6 thành bottom-20 để đẩy nút lên cao hơn
+      className="fixed bottom-20 right-6 p-3 bg-pink-500 text-white rounded-full shadow-lg hover:bg-pink-600 transition-colors z-40 animate-fade-in"
       aria-label="Scroll to top"
     >
       <ArrowUp className="h-5 w-5" />

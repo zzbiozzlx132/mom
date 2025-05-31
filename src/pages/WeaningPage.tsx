@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
-// Đảm bảo weaningChecklistData trong file này đã được cập nhật
 import { weaningChecklistData, weaningGuideData } from '../data/weaningData';
 import ShareButton from '../components/ShareButton';
-import { ChecklistItem } from '../types/ChecklistTypes'; // Giả sử bạn có file types này
+// import { ChecklistItem } from '../types/ChecklistTypes'; // Nếu không dùng ChecklistItem trực tiếp ở đây, có thể bỏ
 import { X, ExternalLink, Check, ChevronDown, ChevronUp, Info } from 'lucide-react';
 
 const WeaningPage: React.FC = () => {
-  // weaningChecklistData ở đây sẽ là phiên bản đã được cập nhật nếu file nguồn đã thay đổi
   const [checklistData, setChecklistData] = useLocalStorage('weaningChecklist', weaningChecklistData);
   const [visibleSections, setVisibleSections] = useState({
     readiness: true,
@@ -75,20 +73,22 @@ const WeaningPage: React.FC = () => {
     }
   };
 
+  // ĐÃ SỬA: Bỏ các class dark:
   const getStatusColor = (percentage: number) => {
-    if (percentage === 0) return 'bg-gray-200 dark:bg-gray-700';
-    if (percentage < 33) return 'bg-red-400 dark:bg-red-600';
-    if (percentage < 66) return 'bg-yellow-400 dark:bg-yellow-600';
-    return 'bg-green-400 dark:bg-green-600';
+    if (percentage === 0) return 'bg-gray-200';
+    if (percentage < 33) return 'bg-red-400';
+    if (percentage < 66) return 'bg-yellow-400';
+    return 'bg-green-400';
   };
 
   return (
-    <div className="bg-pink-50 dark:bg-gray-900 min-h-screen py-8">
+    // ĐÃ XÓA: dark:bg-gray-900
+    <div className="bg-pink-50 min-h-screen py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="text-center mb-8">
-          {/* Tiêu đề và giới thiệu sẽ được lấy từ checklistData đã cập nhật */}
           <h1 className="page-title">{checklistData.title}</h1>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-6">
+          {/* ĐÃ XÓA: dark:text-gray-300 */}
+          <p className="text-gray-600 max-w-2xl mx-auto mb-6">
             {checklistData.introduction}
           </p>
           <div className="flex justify-center mb-6">
@@ -102,29 +102,34 @@ const WeaningPage: React.FC = () => {
         {/* When to start weaning section */}
         <section className="mb-10 animate-fade-in">
           <div
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 cursor-pointer"
+            // ĐÃ XÓA: dark:bg-gray-800
+            className="bg-white rounded-lg shadow-md p-6 cursor-pointer"
             onClick={() => toggleSection('readiness')}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400">
+              {/* ĐÃ XÓA: dark:text-pink-400 */}
+              <h2 className="text-xl font-semibold text-pink-600">
                 Khi nào nên bắt đầu ăn dặm?
               </h2>
+              {/* ĐÃ XÓA: dark:text-pink-400 */}
               {visibleSections.readiness ?
-                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> :
-                <ChevronDown className="w-5 h-5 text-pink-600 dark:text-pink-400" />
+                <ChevronUp className="w-5 h-5 text-pink-600" /> :
+                <ChevronDown className="w-5 h-5 text-pink-600" />
               }
             </div>
 
             {visibleSections.readiness && (
               <div className="mt-4 space-y-3">
-                <p className="text-gray-600 dark:text-gray-300 mb-3">
+                {/* ĐÃ XÓA: dark:text-gray-300 */}
+                <p className="text-gray-600 mb-3">
                   Bé sẵn sàng ăn dặm khi có các dấu hiệu sau:
                 </p>
                 <ul className="space-y-2 pl-5">
                   {weaningGuideData.readyForWeaning.map((item, index) => (
                     <li key={index} className="flex items-start">
                       <span className="inline-block w-5 h-5 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">✓</span>
-                      <span className="text-gray-700 dark:text-gray-300">{item}</span>
+                      {/* ĐÃ XÓA: dark:text-gray-300 */}
+                      <span className="text-gray-700">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -136,45 +141,55 @@ const WeaningPage: React.FC = () => {
         {/* Weaning methods section */}
         <section className="mb-10 animate-fade-in">
           <div
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 cursor-pointer"
+            // ĐÃ XÓA: dark:bg-gray-800
+            className="bg-white rounded-lg shadow-md p-6 cursor-pointer"
             onClick={() => toggleSection('methods')}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400">
+              {/* ĐÃ XÓA: dark:text-pink-400 */}
+              <h2 className="text-xl font-semibold text-pink-600">
                 Các phương pháp ăn dặm
               </h2>
+              {/* ĐÃ XÓA: dark:text-pink-400 */}
               {visibleSections.methods ?
-                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> :
-                <ChevronDown className="w-5 h-5 text-pink-600 dark:text-pink-400" />
+                <ChevronUp className="w-5 h-5 text-pink-600" /> :
+                <ChevronDown className="w-5 h-5 text-pink-600" />
               }
             </div>
 
             {visibleSections.methods && (
               <div className="mt-4 space-y-6">
                 {weaningGuideData.weaningMethods.map((method, index) => (
-                  <div key={index} className="border-b border-gray-200 dark:border-gray-700 pb-5 last:border-0 last:pb-0">
-                    <h3 className="text-lg font-medium text-pink-600 dark:text-pink-400 mb-2">
+                  // ĐÃ XÓA: dark:border-gray-700
+                  <div key={index} className="border-b border-gray-200 pb-5 last:border-0 last:pb-0">
+                    {/* ĐÃ XÓA: dark:text-pink-400 */}
+                    <h3 className="text-lg font-medium text-pink-600 mb-2">
                       {method.name}
                     </h3>
-                    <p className="text-gray-700 dark:text-gray-300 mb-3">
+                    {/* ĐÃ XÓA: dark:text-gray-300 */}
+                    <p className="text-gray-700 mb-3">
                       {method.description}
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <h4 className="text-sm font-medium text-green-600 dark:text-green-400 mb-1">
+                        {/* ĐÃ XÓA: dark:text-green-400 */}
+                        <h4 className="text-sm font-medium text-green-600 mb-1">
                           Ưu điểm
                         </h4>
-                        <ul className="list-disc pl-5 text-sm text-gray-600 dark:text-gray-400">
+                        {/* ĐÃ XÓA: dark:text-gray-400 */}
+                        <ul className="list-disc pl-5 text-sm text-gray-600">
                           {method.pros.map((pro, idx) => (
                             <li key={idx}>{pro}</li>
                           ))}
                         </ul>
                       </div>
                       <div>
-                        <h4 className="text-sm font-medium text-red-600 dark:text-red-400 mb-1">
+                        {/* ĐÃ XÓA: dark:text-red-400 */}
+                        <h4 className="text-sm font-medium text-red-600 mb-1">
                           Nhược điểm
                         </h4>
-                        <ul className="list-disc pl-5 text-sm text-gray-600 dark:text-gray-400">
+                        {/* ĐÃ XÓA: dark:text-gray-400 */}
+                        <ul className="list-disc pl-5 text-sm text-gray-600">
                           {method.cons.map((con, idx) => (
                             <li key={idx}>{con}</li>
                           ))}
@@ -189,18 +204,22 @@ const WeaningPage: React.FC = () => {
         </section>
 
         {/* Progress bars */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8 animate-fade-in">
-          <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400 mb-4">Tiến độ chuẩn bị dụng cụ</h2>
-
+        {/* ĐÃ XÓA: dark:bg-gray-800 */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-8 animate-fade-in">
+          {/* ĐÃ XÓA: dark:text-pink-400 */}
+          <h2 className="text-xl font-semibold text-pink-600 mb-4">Tiến độ chuẩn bị dụng cụ</h2>
           <div className="space-y-4">
             <div>
               <div className="flex justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Tổng thể</span>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                {/* ĐÃ XÓA: dark:text-gray-300 */}
+                <span className="text-sm font-medium text-gray-700">Tổng thể</span>
+                {/* ĐÃ XÓA: dark:text-gray-300 */}
+                <span className="text-sm font-medium text-gray-700">
                   {progress.checked}/{progress.total} ({progress.percentage}%)
                 </span>
               </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+              {/* ĐÃ XÓA: dark:bg-gray-700 */}
+              <div className="w-full bg-gray-200 rounded-full h-2.5">
                 <div
                   className={`h-2.5 rounded-full transition-all duration-500 ${getStatusColor(progress.percentage)}`}
                   style={{ width: `${progress.percentage}%` }}
@@ -210,47 +229,63 @@ const WeaningPage: React.FC = () => {
           </div>
 
           <div className="mt-4 text-right">
+            {/* ĐÃ XÓA: dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600 */}
             <button
               onClick={resetChecklist}
-              className="inline-flex items-center px-3 py-1.5 text-sm bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              className="inline-flex items-center px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
             >
               <X className="w-4 h-4 mr-1" /> Đặt lại danh sách
             </button>
           </div>
         </div>
 
-        {/* === CHECKLIST SECTIONS (PHẦN DUY NHẤT THAY ĐỔI NỘI DUNG TỪ DATA) === */}
-        {/* Phần này sẽ render các dụng cụ từ checklistData đã được cập nhật */}
+        {/* === CHECKLIST SECTIONS === */}
         {checklistData.sections.map((section) => (
           <section key={section.id} className="mb-10 animate-slide-in">
-            <h2 className="section-title bg-white dark:bg-gray-800 p-4 rounded-t-lg shadow-sm">
-              {section.title} {/* Ví dụ: DỤNG CỤ ĂN DẶM CẦN CHUẨN BỊ */}
+            {/* ĐÃ XÓA: dark:bg-gray-800 */}
+            <h2 className="section-title bg-white p-4 rounded-t-lg shadow-sm">
+              {section.title}
             </h2>
 
             {/* Giao diện Bảng (Desktop) */}
-            <div className="bg-white dark:bg-gray-800 rounded-b-lg shadow-md overflow-hidden hidden md:block">
+            {/* ĐÃ XÓA: dark:bg-gray-800 */}
+            <div className="bg-white rounded-b-lg shadow-md overflow-hidden hidden md:block">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                  <thead className="bg-gray-50 dark:bg-gray-900">
+                {/* ĐÃ XÓA: dark:divide-gray-700 */}
+                <table className="min-w-full divide-y divide-gray-200">
+                  {/* ĐÃ XÓA: dark:bg-gray-900 */}
+                  <thead className="bg-gray-50">
                     <tr>
-                      <th scope="col" className="w-12 px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">STT</th>
-                      <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Dụng cụ</th>
-                      <th scope="col" className="w-24 px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Số lượng</th>
-                      <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Mô tả/Ghi chú</th>
-                      <th scope="col" className="w-20 px-4 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Đã có</th>
+                      {/* ĐÃ XÓA: dark:text-gray-400 */}
+                      <th scope="col" className="w-12 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">STT</th>
+                      {/* ĐÃ XÓA: dark:text-gray-400 */}
+                      <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dụng cụ</th>
+                      {/* ĐÃ XÓA: dark:text-gray-400 */}
+                      <th scope="col" className="w-24 px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Số lượng</th>
+                      {/* ĐÃ XÓA: dark:text-gray-400 */}
+                      <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mô tả/Ghi chú</th>
+                      {/* ĐÃ XÓA: dark:text-gray-400 */}
+                      <th scope="col" className="w-20 px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Đã có</th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                  {/* ĐÃ XÓA: dark:bg-gray-800 dark:divide-gray-700 */}
+                  <tbody className="bg-white divide-y divide-gray-200">
                     {section.items.map((item, index) => (
-                      <tr key={item.id} className={`${item.checked ? 'bg-green-50 dark:bg-green-900/20' : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'} transition-colors`}>
-                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{index + 1}</td>
-                        <td className="px-4 py-4 text-sm text-gray-900 dark:text-gray-100"><span className={item.checked ? 'line-through text-gray-500' : ''}>{item.name}</span></td>
-                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{item.quantity}</td>
-                        <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-400">
+                      // ĐÃ XÓA: dark:bg-green-900/20 và dark:hover:bg-gray-700/50
+                      <tr key={item.id} className={`${item.checked ? 'bg-green-50' : 'hover:bg-gray-50'} transition-colors`}>
+                        {/* ĐÃ XÓA: dark:text-gray-400 */}
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{index + 1}</td>
+                        {/* ĐÃ XÓA: dark:text-gray-100 */}
+                        <td className="px-4 py-4 text-sm text-gray-900"><span className={item.checked ? 'line-through text-gray-500' : ''}>{item.name}</span></td>
+                        {/* ĐÃ XÓA: dark:text-gray-400 */}
+                        <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{item.quantity}</td>
+                        {/* ĐÃ XÓA: dark:text-gray-400 */}
+                        <td className="px-4 py-4 text-sm text-gray-500">
                            <div className="flex items-center justify-between">
                             <span className={`${item.checked ? 'line-through' : ''} flex-1 pr-2`}>{item.reason}</span>
                             {item.link && (
-                              <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-2.5 py-1.5 bg-pink-100 text-pink-700 rounded-md shadow-sm hover:bg-pink-200 dark:bg-pink-900 dark:text-pink-300 dark:hover:bg-pink-800 transition-colors text-xs font-medium whitespace-nowrap">
+                              // ĐÃ XÓA: dark:bg-pink-900 dark:text-pink-300 dark:hover:bg-pink-800
+                              <a href={item.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-2.5 py-1.5 bg-pink-100 text-pink-700 rounded-md shadow-sm hover:bg-pink-200 transition-colors text-xs font-medium whitespace-nowrap">
                                 Gợi ý SP <ExternalLink className="w-3.5 h-3.5 ml-1" />
                               </a>
                             )}
@@ -270,14 +305,16 @@ const WeaningPage: React.FC = () => {
             </div>
 
             {/* Giao diện Thẻ (Mobile) */}
-            <div className="block md:hidden bg-white dark:bg-gray-800 rounded-b-lg shadow-md p-4 space-y-4">
+            {/* ĐÃ XÓA: dark:bg-gray-800 */}
+            <div className="block md:hidden bg-white rounded-b-lg shadow-md p-4 space-y-4">
               {section.items.map((item, index) => (
                 <div
                   key={item.id}
+                  // ĐÃ SỬA: Bỏ các class dark:
                   className={`p-4 rounded-lg shadow border-l-4 ${
                     item.checked
-                      ? 'bg-green-50 dark:bg-green-900/20 border-green-400'
-                      : 'bg-white dark:bg-gray-800 border-pink-400'
+                      ? 'bg-green-50 border-green-400' // Bỏ dark:bg-green-900/20
+                      : 'bg-white border-pink-400'   // Bỏ dark:bg-gray-800
                   }`}
                   style={{boxShadow: '0 2px 4px 0 rgba(0,0,0,0.1)'}}
                 >
@@ -287,11 +324,12 @@ const WeaningPage: React.FC = () => {
                         {index + 1}
                       </span>
                       <h3
-                        className={`text-base font-semibold text-gray-900 dark:text-gray-100 flex-1 mr-3 ${
-                          item.checked ? 'line-through text-gray-500 dark:text-gray-400' : ''
+                        // ĐÃ SỬA: Bỏ các class dark:
+                        className={`text-base font-semibold text-gray-900 flex-1 mr-3 ${
+                          item.checked ? 'line-through text-gray-500' : '' // Bỏ dark:text-gray-400
                         }`}
                       >
-                        {item.name} {/* Tên sản phẩm sẽ hiển thị ở đây */}
+                        {item.name}
                       </h3>
                     </div>
                     <label className="relative inline-flex items-center justify-center cursor-pointer flex-shrink-0">
@@ -303,31 +341,36 @@ const WeaningPage: React.FC = () => {
                       />
                       <div className={`w-6 h-6 border-2 rounded-md flex items-center justify-center transition-colors
                         ${item.checked
-                          ? 'bg-pink-500 border-pink-500 dark:bg-pink-600 dark:border-pink-600'
-                          : 'bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600'}`}>
+                          // ĐÃ SỬA: Bỏ các class dark:
+                          ? 'bg-pink-500 border-pink-500' // Bỏ dark:bg-pink-600 dark:border-pink-600
+                          // ĐÃ SỬA: Bỏ các class dark:
+                          : 'bg-white border-gray-300'   // Bỏ dark:bg-gray-700 dark:border-gray-600
+                        }`}>
                         {item.checked && <Check className="w-4 h-4 text-white" />}
                       </div>
                     </label>
                   </div>
-
-                  <div className="text-sm text-gray-600 dark:text-gray-400 mb-3 ml-9">
-                    <strong>Số lượng:</strong> {item.quantity} {/* Số lượng sản phẩm */}
+                  {/* ĐÃ XÓA: dark:text-gray-400 */}
+                  <div className="text-sm text-gray-600 mb-3 ml-9">
+                    <strong>Số lượng:</strong> {item.quantity}
                   </div>
 
                   {item.reason && (
-                    <p className={`text-sm text-gray-500 dark:text-gray-400 mb-4 ml-9 ${item.checked ? 'line-through' : ''}`}>
-                      {item.reason} {/* Mô tả/ghi chú sản phẩm */}
+                    // ĐÃ XÓA: dark:text-gray-400
+                    <p className={`text-sm text-gray-500 mb-4 ml-9 ${item.checked ? 'line-through' : ''}`}>
+                      {item.reason}
                     </p>
                   )}
 
                   {item.link && (
+                    // ĐÃ XÓA: dark:bg-pink-900 dark:text-pink-300 dark:hover:bg-pink-800
                     <a
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center px-2.5 py-1.5 bg-pink-100 text-pink-700 rounded-md shadow-sm hover:bg-pink-200 dark:bg-pink-900 dark:text-pink-300 dark:hover:bg-pink-800 transition-colors text-xs font-medium whitespace-nowrap ml-9"
+                      className="inline-flex items-center px-2.5 py-1.5 bg-pink-100 text-pink-700 rounded-md shadow-sm hover:bg-pink-200 transition-colors text-xs font-medium whitespace-nowrap ml-9"
                     >
-                      Gợi ý SP <ExternalLink className="w-3.5 h-3.5 ml-1" /> {/* Link gợi ý sản phẩm */}
+                      Gợi ý SP <ExternalLink className="w-3.5 h-3.5 ml-1" />
                     </a>
                   )}
                 </div>
@@ -339,57 +382,74 @@ const WeaningPage: React.FC = () => {
         {/* Meal plans by age section */}
         <section className="mb-10 animate-fade-in">
           <div
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 cursor-pointer"
+            // ĐÃ XÓA: dark:bg-gray-800
+            className="bg-white rounded-lg shadow-md p-6 cursor-pointer"
             onClick={() => toggleSection('mealPlans')}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400">
+              {/* ĐÃ XÓA: dark:text-pink-400 */}
+              <h2 className="text-xl font-semibold text-pink-600">
                 Thực đơn theo độ tuổi
               </h2>
+              {/* ĐÃ XÓA: dark:text-pink-400 */}
               {visibleSections.mealPlans ?
-                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> :
-                <ChevronDown className="w-5 h-5 text-pink-600 dark:text-pink-400" />
+                <ChevronUp className="w-5 h-5 text-pink-600" /> :
+                <ChevronDown className="w-5 h-5 text-pink-600" />
               }
             </div>
 
             {visibleSections.mealPlans && (
               <div className="mt-6 space-y-8">
                 {weaningGuideData.mealPlansByAge.map((agePlan, index) => (
-                  <div key={index} className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-0 last:pb-0">
-                    <h3 className="text-lg font-medium text-pink-600 dark:text-pink-400 mb-3 inline-flex items-center">
-                      <span className="bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 text-sm py-1 px-2 rounded-md mr-2">
+                  // ĐÃ XÓA: dark:border-gray-700
+                  <div key={index} className="border-b border-gray-200 pb-6 last:border-0 last:pb-0">
+                    {/* ĐÃ XÓA: dark:text-pink-400 */}
+                    <h3 className="text-lg font-medium text-pink-600 mb-3 inline-flex items-center">
+                      {/* ĐÃ XÓA: dark:bg-pink-900 dark:text-pink-200 */}
+                      <span className="bg-pink-100 text-pink-800 text-sm py-1 px-2 rounded-md mr-2">
                         {agePlan.age}
                       </span>
                       {index === 0 && (
-                        <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs py-0.5 px-2 rounded-md ml-2">
+                        // ĐÃ XÓA: dark:bg-green-900 dark:text-green-200
+                        <span className="bg-green-100 text-green-800 text-xs py-0.5 px-2 rounded-md ml-2">
                           Bắt đầu
                         </span>
                       )}
                     </h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                      <div className="bg-pink-50 dark:bg-pink-900/20 p-3 rounded-md">
-                        <p className="text-sm font-medium text-pink-700 dark:text-pink-300 mb-1">Tần suất</p>
-                        <p className="text-sm text-gray-700 dark:text-gray-300">{agePlan.frequency}</p>
+                      {/* ĐÃ XÓA: dark:bg-pink-900/20 */}
+                      <div className="bg-pink-50 p-3 rounded-md">
+                        {/* ĐÃ XÓA: dark:text-pink-300 */}
+                        <p className="text-sm font-medium text-pink-700 mb-1">Tần suất</p>
+                        {/* ĐÃ XÓA: dark:text-gray-300 */}
+                        <p className="text-sm text-gray-700">{agePlan.frequency}</p>
                       </div>
-                      <div className="bg-pink-50 dark:bg-pink-900/20 p-3 rounded-md">
-                        <p className="text-sm font-medium text-pink-700 dark:text-pink-300 mb-1">Kết cấu</p>
-                        <p className="text-sm text-gray-700 dark:text-gray-300">{agePlan.consistency}</p>
+                      {/* ĐÃ XÓA: dark:bg-pink-900/20 */}
+                      <div className="bg-pink-50 p-3 rounded-md">
+                        {/* ĐÃ XÓA: dark:text-pink-300 */}
+                        <p className="text-sm font-medium text-pink-700 mb-1">Kết cấu</p>
+                        {/* ĐÃ XÓA: dark:text-gray-300 */}
+                        <p className="text-sm text-gray-700">{agePlan.consistency}</p>
                       </div>
-                      <div className="bg-pink-50 dark:bg-pink-900/20 p-3 rounded-md">
-                        <p className="text-sm font-medium text-pink-700 dark:text-pink-300 mb-1">Khẩu phần</p>
-                        <p className="text-sm text-gray-700 dark:text-gray-300">{agePlan.portions}</p>
+                      {/* ĐÃ XÓA: dark:bg-pink-900/20 */}
+                      <div className="bg-pink-50 p-3 rounded-md">
+                        {/* ĐÃ XÓA: dark:text-pink-300 */}
+                        <p className="text-sm font-medium text-pink-700 mb-1">Khẩu phần</p>
+                        {/* ĐÃ XÓA: dark:text-gray-300 */}
+                        <p className="text-sm text-gray-700">{agePlan.portions}</p>
                       </div>
                     </div>
-
-                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center">
+                    {/* ĐÃ XÓA: dark:text-gray-300 */}
+                    <h4 className="text-sm font-medium text-gray-700 mb-2 flex items-center">
                       <Info className="w-4 h-4 mr-1 text-pink-500" /> Thực phẩm gợi ý
                     </h4>
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                       {agePlan.foods.map((food, idx) => (
                         <li key={idx} className="flex items-start">
                           <span className="inline-block w-5 h-5 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">•</span>
-                          <span className="text-sm text-gray-700 dark:text-gray-300">{food}</span>
+                          {/* ĐÃ XÓA: dark:text-gray-300 */}
+                          <span className="text-sm text-gray-700">{food}</span>
                         </li>
                       ))}
                     </ul>
@@ -403,23 +463,28 @@ const WeaningPage: React.FC = () => {
         {/* Foods to avoid section */}
         <section className="mb-10 animate-fade-in">
           <div
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 cursor-pointer"
+            // ĐÃ XÓA: dark:bg-gray-800
+            className="bg-white rounded-lg shadow-md p-6 cursor-pointer"
             onClick={() => toggleSection('avoidFoods')}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400">
+              {/* ĐÃ XÓA: dark:text-pink-400 */}
+              <h2 className="text-xl font-semibold text-pink-600">
                 Thực phẩm cần tránh
               </h2>
+              {/* ĐÃ XÓA: dark:text-pink-400 */}
               {visibleSections.avoidFoods ?
-                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> :
-                <ChevronDown className="w-5 h-5 text-pink-600 dark:text-pink-400" />
+                <ChevronUp className="w-5 h-5 text-pink-600" /> :
+                <ChevronDown className="w-5 h-5 text-pink-600" />
               }
             </div>
 
             {visibleSections.avoidFoods && (
               <div className="mt-4">
-                <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-md mb-4">
-                  <p className="text-sm text-red-800 dark:text-red-300 font-medium">
+                {/* ĐÃ XÓA: dark:bg-red-900/20 */}
+                <div className="bg-red-50 p-4 rounded-md mb-4">
+                  {/* ĐÃ XÓA: dark:text-red-300 */}
+                  <p className="text-sm text-red-800 font-medium">
                     Lưu ý: Cần đặc biệt chú ý tránh những thực phẩm sau để đảm bảo an toàn cho bé.
                   </p>
                 </div>
@@ -427,7 +492,8 @@ const WeaningPage: React.FC = () => {
                   {weaningGuideData.avoidFoods.map((item, index) => (
                     <li key={index} className="flex items-start">
                       <span className="inline-block w-5 h-5 bg-red-100 text-red-600 rounded-full flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">✕</span>
-                      <span className="text-gray-700 dark:text-gray-300">{item}</span>
+                      {/* ĐÃ XÓA: dark:text-gray-300 */}
+                      <span className="text-gray-700">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -439,23 +505,28 @@ const WeaningPage: React.FC = () => {
         {/* Safety tips section */}
         <section className="mb-10 animate-fade-in">
           <div
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 cursor-pointer"
+            // ĐÃ XÓA: dark:bg-gray-800
+            className="bg-white rounded-lg shadow-md p-6 cursor-pointer"
             onClick={() => toggleSection('safety')}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-pink-600 dark:text-pink-400">
+              {/* ĐÃ XÓA: dark:text-pink-400 */}
+              <h2 className="text-xl font-semibold text-pink-600">
                 Lưu ý về an toàn và vệ sinh
               </h2>
+              {/* ĐÃ XÓA: dark:text-pink-400 */}
               {visibleSections.safety ?
-                <ChevronUp className="w-5 h-5 text-pink-600 dark:text-pink-400" /> :
-                <ChevronDown className="w-5 h-5 text-pink-600 dark:text-pink-400" />
+                <ChevronUp className="w-5 h-5 text-pink-600" /> :
+                <ChevronDown className="w-5 h-5 text-pink-600" />
               }
             </div>
 
             {visibleSections.safety && (
               <div className="mt-4">
-                <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-md mb-4">
-                  <p className="text-sm text-blue-800 dark:text-blue-300 font-medium">
+                {/* ĐÃ XÓA: dark:bg-blue-900/20 */}
+                <div className="bg-blue-50 p-4 rounded-md mb-4">
+                  {/* ĐÃ XÓA: dark:text-blue-300 */}
+                  <p className="text-sm text-blue-800 font-medium">
                     Những điều cần nhớ để đảm bảo an toàn khi cho bé ăn dặm.
                   </p>
                 </div>
@@ -463,7 +534,8 @@ const WeaningPage: React.FC = () => {
                   {weaningGuideData.safetyTips.map((tip, index) => (
                     <li key={index} className="flex items-start">
                       <span className="inline-block w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">✓</span>
-                      <span className="text-gray-700 dark:text-gray-300">{tip}</span>
+                      {/* ĐÃ XÓA: dark:text-gray-300 */}
+                      <span className="text-gray-700">{tip}</span>
                     </li>
                   ))}
                 </ul>
