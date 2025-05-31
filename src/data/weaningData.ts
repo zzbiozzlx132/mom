@@ -2,7 +2,7 @@ import { ChecklistData } from '../types/ChecklistTypes';
 
 export const weaningChecklistData: ChecklistData = {
   title: "CHUẨN BỊ CHO BÉ ĂN DẶM – TỪ A ĐẾN Z",
-  introduction: "Chào mọi người!\nSau đây là tất tần tật những món mình đã chuẩn bị, kèm theo một số kinh nghiệm thực tế và những sản phẩm uy tín mình đang dùng – để mẹ nào cần thì tham khảo cho tiện nhé!",
+  introduction: "Chào mọi người!\nHôm nay mình muốn chia sẻ về một chủ đề chắc chắn mẹ nào cũng phải trải qua: chuẩn bị cho bé ăn dặm. Đây không chỉ là một cột mốc phát triển quan trọng của con, mà còn là “cuộc cách mạng nhỏ” với cả nhà – đặc biệt là mẹ. Và nếu chuẩn bị đầy đủ, khoa học ngay từ đầu, mọi thứ sẽ dễ dàng hơn rất nhiều!\nSau đây là tất tần tật những món mình đã chuẩn bị, kèm theo một số kinh nghiệm thực tế và những sản phẩm uy tín mình đang dùng – để mẹ nào cần thì tham khảo cho tiện nhé!",
   sections: [
     {
       id: "weaning-essentials",
@@ -100,9 +100,9 @@ export const weaningChecklistData: ChecklistData = {
         },
         {
           id: "w12",
-          name: "Dụng cụ vệ sinh (cọ rửa…)",
+          name: "Dụng cụ vệ sinh (miếng rửa…)",
           quantity: "1 bộ",
-          reason: "Dùng để vệ sinh sạch sẽ các vật dụng sau ăn.", // Mô tả từ file code gốc, vì bạn ghi tùy nhu cầu
+          reason: "Dùng để vệ sinh sạch sẽ các vật dụng sau ăn như chén,.., Tuỳ nhu cầu ý thích của các mẹ khác nhau. nên mình không có link nha", // Mô tả từ file code gốc, vì bạn ghi tùy nhu cầu
           // link: không có link theo yêu cầu
           checked: false
         },
