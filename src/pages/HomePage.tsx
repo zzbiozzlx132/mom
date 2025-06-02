@@ -1,9 +1,18 @@
+// src/pages/HomePage.tsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import ShareButton from '../components/ShareButton';
+import ShopeeAffiliateLink from '../components/ShopeeAffiliateLink'; // << THÊM IMPORT NÀY
 
 const HomePage: React.FC = () => {
+  const vitaminLinks = [
+    { name: "Vitamin tổng hợp", url: "https://s.shopee.vn/qWpl3pe3o", itemName: "Vitamin tổng hợp (Homepage)" },
+    { name: "Sắt", url: "https://s.shopee.vn/9pReTdgUZE", itemName: "Sắt (Homepage)" },
+    { name: "Canxi", url: "https://s.shopee.vn/2Vf3kD7GZn", itemName: "Canxi (Homepage)" },
+    { name: "DHA", url: "https://s.shopee.vn/8AJQUdxSRk", itemName: "DHA (Homepage)" },
+  ];
+
   return (
     <div className="bg-gradient-to-b from-pink-50 to-white">
       <div className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
@@ -156,52 +165,20 @@ const HomePage: React.FC = () => {
             Vitamin cho mẹ bầu (Nhấn vào để xem gợi ý):
           </h4>
           <ul className="space-y-3 mt-2 list-none p-0">
-            <li>
-              <a
-                href="https://s.shopee.vn/qWpl3pe3o"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-between w-full px-4 py-3 bg-pink-100 text-pink-700 rounded-lg shadow-sm hover:bg-pink-200 transition-all group"
-              >
-                <span>Vitamin tổng hợp</span>
-                <ChevronRight className="h-5 w-5 text-pink-500 group-hover:text-pink-600" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://s.shopee.vn/9pReTdgUZE"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-between w-full px-4 py-3 bg-pink-100 text-pink-700 rounded-lg shadow-sm hover:bg-pink-200 transition-all group"
-              >
-                <span>Sắt</span>
-                <ChevronRight className="h-5 w-5 text-pink-500 group-hover:text-pink-600" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://s.shopee.vn/2Vf3kD7GZn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-between w-full px-4 py-3 bg-pink-100 text-pink-700 rounded-lg shadow-sm hover:bg-pink-200 transition-all group"
-              >
-                <span>Canxi</span>
-                <ChevronRight className="h-5 w-5 text-pink-500 group-hover:text-pink-600" />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://s.shopee.vn/8AJQUdxSRk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-between w-full px-4 py-3 bg-pink-100 text-pink-700 rounded-lg shadow-sm hover:bg-pink-200 transition-all group"
-              >
-                <span>DHA</span>
-                <ChevronRight className="h-5 w-5 text-pink-500 group-hover:text-pink-600" />
-              </a>
-            </li>
+            {vitaminLinks.map((vitamin, index) => (
+              <li key={index}>
+                {/* << THAY THẾ Ở ĐÂY CHO CÁC LINK VITAMIN >> */}
+                <ShopeeAffiliateLink
+                  shopeeUrl={vitamin.url}
+                  itemName={vitamin.itemName} // itemName đã bao gồm "(Homepage)" để phân biệt
+                  className="inline-flex items-center justify-between w-full px-4 py-3 bg-pink-100 text-pink-700 rounded-lg shadow-sm hover:bg-pink-200 transition-all group"
+                >
+                  <span>{vitamin.name}</span>
+                  <ChevronRight className="h-5 w-5 text-pink-500 group-hover:text-pink-600" />
+                </ShopeeAffiliateLink>
+              </li>
+            ))}
           </ul>
-
         </section>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
